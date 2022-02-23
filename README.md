@@ -1,7 +1,7 @@
 # SSISPentryAnsvarServer
 
 A simple server for handling and providing who is responsible for the pentries ("pentryansvar") 
-in my school, Stockholm Science and Innovation School. Comments are in Swedish.
+in my school (Stockholm Science and Innovation School). (Code comments are in Swedish).
 The server is built using [Python](https://python.org/) and [FastAPI](https://fastapi.tiangolo.com/)
 
 ### Installation

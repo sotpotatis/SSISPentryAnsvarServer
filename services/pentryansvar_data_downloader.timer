@@ -1,0 +1,14 @@
+#Timer for the pentryansvar_data_downloader.service.
+[Unit]
+Description=Timer that triggers downloads of pentryansvar data for the school Stockholm Science & Innovation School
+
+[Timer]
+Persistent=true
+#Run a minute after reboot
+OnBootSec=60
+#Run every day at 01:00 AM Stockholm time
+OnCalendar=*-*-* 00:01:00 Europe/Stockholm
+Unit=pentryansvar_data_downloader.service
+
+[Install]
+WantedBy=timers.target

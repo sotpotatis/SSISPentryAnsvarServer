@@ -1,0 +1,9 @@
+[Unit]
+Description=Downloads pentryansvar data for the school Stockholm Science & Innovation School
+
+[Service]
+#Run the data downloader
+ExecStart=python3 /srv/SSISPentryAnsvarServer/data_downloader.py
+
+[Install]
+WantedBy=multi-user.target

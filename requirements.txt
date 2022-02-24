@@ -1,4 +1,4 @@
 pytz~=2018.9
 fastapi~=0.74.1
 requests~=2.21.0
-fastapi[all]
+uvicorn

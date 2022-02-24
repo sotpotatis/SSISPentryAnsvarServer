@@ -13,10 +13,18 @@ The server is built using [Python](https://python.org/) and [FastAPI](https://fa
 
 **Scheduling server start and data retrieval:**
 * cd `/srv/SSISPentryAnsvarServer`/`[cloned directory]`
+* `chmod +x start_pentryansvar_server.sh`
 * `mv services/pentryansvar_data_downloader.service /etc/systemd/system/pentryansvar_data_downloader.service`
 * `mv services/pentryansvar_data_downloader.timer /etc/systemd/system/pentryansvar_data_downloader.timer`
 * `mv services/pentryansvar_data_server.service /etc/systemd/system/pentryansvar_data_server.service`
 * `systemctl status ssis_pentryansvar:`
+
+**Dealing with various firewall problems:**
+(Note: These are just example commands that I found worked.
+They might not work for you.)
+
+* `sudo ufw allow 80`/`sudo ufw allow http`
+* `sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 80 -j ACCEPT` (thanks, [Stack Overflow]())
 
 ### How to use
 

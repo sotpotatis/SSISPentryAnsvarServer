@@ -2,4 +2,7 @@
 Description=Runs a server providing pentryansvar data for the school Stockholm Science & Innovation School
 
 [Service]
-ExecStart=/srv/services/start_pentryansvar_server.sh
+ExecStart=bash /srv/SSISPentryAnsvarServer/services/start_pentryansvar_server.sh
+
+[Install]
+WantedBy=multi-user.target

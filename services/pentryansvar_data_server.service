@@ -2,6 +2,4 @@
 Description=Runs a server providing pentryansvar data for the school Stockholm Science & Innovation School
 
 [Service]
-Type=simple
 ExecStart=uvicorn /srv/SSISPentryAnsvarServer/main:app
-Type=oneshot

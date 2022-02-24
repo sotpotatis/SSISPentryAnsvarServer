@@ -13,7 +13,9 @@ The server is built using [Python](https://python.org/) and [FastAPI](https://fa
 
 **Scheduling server start and data retrieval:**
 * cd `/srv/SSISPentryAnsvarServer`/`[cloned directory]`
-* `cp services/* /etc/systemd/user/*`
+* `mv services/pentryansvar_data_downloader.service /etc/systemd/system/pentryansvar_data_downloader.service`
+* `mv services/pentryansvar_data_downloader.timer /etc/systemd/system/pentryansvar_data_downloader.timer`
+* `mv services/pentryansvar_data_server.service /etc/systemd/system/pentryansvar_data_server.service`
 * `systemctl status ssis_pentryansvar:`
 
 ### How to use

@@ -1,11 +1,25 @@
 from fastapi import FastAPI, HTTPException, Body
+from fastapi.middleware.cors import CORSMiddleware
 from data_utilities import get_pentry_data
 import logging, datetime, pytz
 
 logger = logging.getLogger(__name__)
 
 app = FastAPI()  # Skapa en app
-
+#Initiera CORS-policys
+logger.debug("Initierar CORS...")
+CORS_ALL_WILDCARD = ["*"] #Wildcard för allt på CORS
+CORS_ALLOWED_ORIGINS = CORS_ALL_WILDCARD
+CORS_ALLOWED_HEADERS = CORS_ALL_WILDCARD,
+CORS_ALLOWED_METHODS = CORS_ALL_WILDCARD
+app.add_middleware( #Lägg till CORS-hanterare
+    CORSMiddleware,
+    allow_origins=CORS_ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_headers=CORS_ALL_WILDCARD,
+    allow_methods=CORS_ALLOWED_METHODS
+)
+logger.debug("CORS initierat.")
 API_EXAMPLE_RESPONSE = [
     {
         "pentry_name": "Pentry 2",

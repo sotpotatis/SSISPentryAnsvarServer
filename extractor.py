@@ -10,7 +10,7 @@ TEST_STRINGS = [
 ]
 TEST_STRING = ""
 #Regex för att extrahera grunddata (pentrynamn, pentrynummer, och ansvarig klass + annat grupperat efter som vi matchar sen
-PENTRY_RESPONSIBLE_CLASS_REGEX = "((te {0,}[0-9]{2,}[A-Z])|personal)" #Matchar en ansvarig klass eller en ansvarig grupp
+PENTRY_RESPONSIBLE_CLASS_REGEX = "(\(?((te {0,}[0-9]{2,}[a-z])|personal)\)?)" #Matchar en ansvarig klass eller en ansvarig grupp
 PENTRY_NUMBER_REGEX = "(pentry ([1-2])):" #Matchar pentrynummer
 PENTRY_RESPONSIBLE_PERSON_REGEX = "([^ ,&][a-zA-Z]([a-zA-Z]|( |-))+[^ ,&])" #Matchar personer som är ansvariga för pentryt
 logger = logging.getLogger(__name__)
@@ -42,12 +42,13 @@ def parse_pentryansvar_string(string):
     else:
         logger.warning("Pentry kunde inte hittas!")
         pentry_name = pentry_number = None
-    responsible_class = re.search(PENTRY_RESPONSIBLE_CLASS_REGEX, string, re.IGNORECASE)
-    if responsible_class != None:
-        responsible_class = responsible_class.group(0)
-        string = string.replace(responsible_class, "")
+    responsible_class_find = re.search(PENTRY_RESPONSIBLE_CLASS_REGEX, string, re.IGNORECASE)
+    if responsible_class_find != None:
+        responsible_class = responsible_class_find.group(2) #Get the responsible class name
+        string = string.replace(responsible_class_find.group(0), "") #Remove the found class name from the string
     else:
         logger.warning("Ansvarig klass kunde inte hittas!")
+        responsible_class = None
     print(string)
     responsible_persons = re.findall(PENTRY_RESPONSIBLE_PERSON_REGEX, string, re.IGNORECASE)
     if responsible_persons == []:

@@ -44,7 +44,7 @@ def parse_pentryansvar_string(string):
         pentry_name = pentry_number = None
     responsible_class_find = re.search(PENTRY_RESPONSIBLE_CLASS_REGEX, string, re.IGNORECASE)
     if responsible_class_find != None:
-        responsible_class = responsible_class_find.group(2) #Get the responsible class name
+        responsible_class = responsible_class_find.group(2).replace(" ", "") #Get the responsible class name
         string = string.replace(responsible_class_find.group(0), "") #Remove the found class name from the string
     else:
         logger.warning("Ansvarig klass kunde inte hittas!")

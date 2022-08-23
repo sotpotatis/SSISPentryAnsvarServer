@@ -10,7 +10,7 @@ app = FastAPI()  # Skapa en app
 logger.debug("Initierar CORS...")
 CORS_ALL_WILDCARD = ["*"] #Wildcard för allt på CORS
 CORS_ALLOWED_ORIGINS = CORS_ALL_WILDCARD
-CORS_ALLOWED_HEADERS = CORS_ALL_WILDCARD,
+CORS_ALLOWED_HEADERS = CORS_ALL_WILDCARD
 CORS_ALLOWED_METHODS = CORS_ALL_WILDCARD
 app.add_middleware( #Lägg till CORS-hanterare
     CORSMiddleware,

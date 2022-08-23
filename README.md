@@ -6,6 +6,13 @@ The server is built using [Python](https://python.org/) and [FastAPI](https://fa
 
 ### Installation
 
+#### Docker installation
+
+Docker makes code accessible at `/SSISPentryAnsvarServer`.
+<DOCS PENDING>
+
+#### Manual installation
+
 **Basic installation:**
 * `git clone https://github.com/sotpotatis/SSISPentryAnsvarServer.git /srv/SSISPentryAnsvarServer` or `gh repo clone sotpotatis/SSISPentryAnsvarServer`:  **Note the directory part, it is important if you don't want to edit the services!**
 * `pip install -r "requirements.json"`

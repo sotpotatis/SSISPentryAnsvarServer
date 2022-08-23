@@ -1,0 +1,4 @@
+#Contains cronjobs related to the pentryansvar server.
+#These are used for downloading and parsing data and made to be used by Docker,
+#but can of course be used by anyone who does not want to use systemctl.
+0 1 * * * cd /SSISPentryAnsvarServer/ && python3.9 data_downloader.py

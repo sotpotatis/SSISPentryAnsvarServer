@@ -4,7 +4,7 @@ from redis import Redis
 from rq import Queue
 from rq_scheduler import Scheduler
 from data_downloader import run
-queue = Queue("pentryansvar_data", connection=Redis()) #Create a Redis queue
+queue = Queue("pentryansvar_data", connection=Redis(host="redis", port=6379)) #Create a Redis queue
 scheduler = Scheduler(queue=queue)
 scheduler.cron(
     "0 1 * * *",

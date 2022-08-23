@@ -11,7 +11,7 @@ COPY . .
 ENV IS_DOCKER=1
 #Ensure permissions
 CMD "chmod +x ./scripts/start_pentryansvar_server.sh"
-CMD "chmod +x ./scripts/start_pentryansvar_cronjob.sh"
+CMD "chmod +x ./scripts/start_pentryansvar_data_cronjob.sh"
 #Run main app
 CMD "./scripts/start_pentryansvar_server.sh"
 CMD "./scripts/start_pentryansvar_data_cronjob.sh"

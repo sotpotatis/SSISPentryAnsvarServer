@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pentryansvar-server
+  track: pentryansvar-server
+spec:
+  path: /
+  to:
+    kind: Service
+    name: pentryansvar-server
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

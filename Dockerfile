@@ -5,16 +5,16 @@ WORKDIR /SSISPentryAnsvarServer
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 #Copy rest of directory
-EXPOSE 80
+EXPOSE 8080
 COPY . .
 #Set environmental variables
 ENV IS_DOCKER=1
 #Ensure permissions
-CMD "chmod +x ./scripts/start_pentryansvar_server.sh"
+#CMD "chmod +x ./scripts/start_pentryansvar_server.sh"
 #CMD "chmod +x ./scripts/start_pentryansvar_data_cronjob.sh"
 #Run main app
 #CMD "./scripts/start_pentryansvar_server.sh"
-CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "80"]
+CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "8080"]
 #CMD ["python", "docker_tasks.py"]
 #Run redis scheduler
 #CMD "rqscheduler"

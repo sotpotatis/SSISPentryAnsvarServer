@@ -1,12 +1,38 @@
+import os
+
 from fastapi import FastAPI, HTTPException, Body
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from data_utilities import get_pentry_data
-import logging, datetime, pytz, sys
-
+import logging, datetime, pytz, sys, uvicorn
+from logging.handlers import RotatingFileHandler
 logger = logging.getLogger(__name__)
 stream_handler = logging.StreamHandler(sys.stdout)
 logger.addHandler(stream_handler) # Lägg till logging stream-handler
+
+# Hämta server-inställningar
+try:
+    SERVER_HOST = os.environ["PENTRYANSVAR_SERVER_HOST"]
+    SERVER_PORT = int(os.environ["PENTRYANSVAR_SERVER_PORT"])
+    LOGGING_LEVEL = os.getenv("PENTRYANSVAR_SERVER_LOGGING_LEVEL", logging.INFO) # Default log-level: info
+except Exception as e:
+    logger.critical(f"Kunde inte initiera inställningar från environment variables. Fel: {e}.", exc_info=True)
+    exit(1) # Avsluta med fel
+
+# Skapa en logging-filehandler
+logging_path = os.path.join(os.getcwd(), "logging")
+log_filename = os.path.join(logging_path, "server.log")
+if not os.path.exists(logging_path):
+    logger.info("Skapar filsökväg för logging...")
+    os.mkdir(logging_path)
+    logger.info("Mapp för logging skapad.")
+filehandler = RotatingFileHandler(log_filename)
+logger.addHandler(filehandler)
+logging.basicConfig(level=LOGGING_LEVEL)
 app = FastAPI()  # Skapa en app
+# Lägg till statisk mapp
+static_path = os.path.join(os.getcwd(), "static")
+app.mount("/", StaticFiles(directory=static_path, html=True), name="static")
 # Initiera CORS-policys
 logger.debug("Initierar CORS...")
 CORS_ALL_WILDCARD = ["*"] # Wildcard för allt på CORS
@@ -55,3 +81,6 @@ async def get_pentryansvar_for_week(week_number: int = None):
         raise HTTPException(status_code=404, detail="Det finns ingen data cachad för den veckan.")
     else:
         return pentryansvar_data
+
+if __name__ == "__main__":
+    uvicorn.run(app, host=SERVER_HOST, port=SERVER_PORT)

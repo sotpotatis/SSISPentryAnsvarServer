@@ -9,12 +9,14 @@ EXPOSE 8080
 COPY . .
 #Set environmental variables
 ENV IS_DOCKER=1
+ENV PENTRYANSVAR_SERVER_HOST="0.0.0.0"
+ENV PENTRYANSVAR_SERVER_PORT="8080"
 #Ensure permissions
 #CMD "chmod +x ./scripts/start_pentryansvar_server.sh"
 #CMD "chmod +x ./scripts/start_pentryansvar_data_cronjob.sh"
 #Run main app
 #CMD "./scripts/start_pentryansvar_server.sh"
-CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "8080"]
+CMD uvicorn "main:app" --host="127.0.0.1" --port="8080"
 #CMD ["python", "docker_tasks.py"]
 #Run redis scheduler
 #CMD "rqscheduler"

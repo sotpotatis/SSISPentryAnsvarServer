@@ -7,6 +7,7 @@ RUN pip install -r requirements.txt
 #Copy rest of directory
 EXPOSE 8080
 COPY . .
+RUN mkdir logging
 #Set environmental variables
 ENV IS_DOCKER=1
 ENV PENTRYANSVAR_SERVER_HOST="0.0.0.0"

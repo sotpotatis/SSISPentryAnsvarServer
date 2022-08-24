@@ -14,7 +14,7 @@ CMD "chmod +x ./scripts/start_pentryansvar_server.sh"
 #CMD "chmod +x ./scripts/start_pentryansvar_data_cronjob.sh"
 #Run main app
 #CMD "./scripts/start_pentryansvar_server.sh"
-CMD ["uvicorn", "main:app", "--host:localhost", "--port=80"]
+CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "80"]
 #CMD ["python", "docker_tasks.py"]
 #Run redis scheduler
 #CMD "rqscheduler"
